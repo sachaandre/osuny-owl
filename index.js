@@ -2,6 +2,7 @@ module.exports = class OsunyOwl {
     constructor(website_id){
         this.website_id = website_id
         this.category_ids = []
+        this.api_key_defined = process.env.OSUNY_API ? true : false
     }
 
     set website_id(website_id){
@@ -37,6 +38,15 @@ module.exports = class OsunyOwl {
             this.category_ids = this.category_ids.filter(e => e !== category_id)
         }
     }
+
+    /**
+     * TODO
+     * 
+     *  - function : postToOsuny(Communication::Post object)
+     *          * Vérifier la connexion API
+     *          * Vérifier qu'il y ait un site
+     * 
+     */
 
 }
 
