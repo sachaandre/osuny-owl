@@ -1,0 +1,16 @@
+{
+  "name": "osuny-owl",
+  "version": "1.0.0",
+  "description": "Osuny Owl is an object that can go talk to the Osuny API, to create post or other osuny components from a large amount of data",
+  "keywords": [
+    "osuny",
+    "api"
+  ],
+  "license": "GPL-3.0",
+  "author": "Sacha André",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
