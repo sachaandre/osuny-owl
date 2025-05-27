@@ -198,7 +198,7 @@ export class OsunyUtility{
             "migration_identifier": migration_identifier,
             "full_width": full_width,
             "category_ids": category_ids,
-            "localization": {
+            "localizations": {
                 "fr": {
                     "id": undefined,
                     "migration_identifier": migration_identifier + "_fr",
