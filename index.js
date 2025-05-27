@@ -1,8 +1,9 @@
 module.exports = class OsunyOwl {
-    constructor(website_id){
+    constructor(website_id, api_url){
         this.website_id = website_id
         this.category_ids = []
-        this.api_key_defined = process.env.OSUNY_API ? true : false
+        this.api_key_defined = process.env.OSUNY_API_KEY ? true : false
+        this.api_url = api_url
     }
 
     set website_id(website_id){
@@ -11,6 +12,10 @@ module.exports = class OsunyOwl {
 
     set category_ids(category_ids){
         this._category_ids = category_ids
+    }
+
+    checkApiKey(){
+        this.api_key_defined = process.env.OSUNY_API_KEY ? true : false
     }
 
     get website_id(){
@@ -48,6 +53,40 @@ module.exports = class OsunyOwl {
      * 
      */
 
+    /**
+     * Async function to post a Communication::Post object to a specific website
+     * 
+     * @param {Object} post A Communication::Post object for Osuny's websites 
+     * @returns Returns true if the operation is succesfull
+     */
+    async postToOsuny(post){
+        if(this.api_key_defined){
+            const url = this.api_url + "/communication/websites/" + this.website_id + "/posts"
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers:{
+                        "Content-Type": "application/json",
+                        "X-Osuny-Token": process.env.OSUNY_API_KEY
+                    },
+                    body: JSON.stringify(post)
+                })
+
+                if (!response.ok){
+                    throw new Error(`Response status: ${response.status}`)
+                } else {
+                    return true
+                }
+
+            } catch (error) {
+                console.error(error.message)
+            }
+        } else {
+            throw new Error("No API Key Defined")
+        }
+        
+    }
 }
 
 
