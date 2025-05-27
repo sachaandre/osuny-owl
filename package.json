@@ -8,9 +8,13 @@
   ],
   "license": "GPL-3.0",
   "author": "Sacha André",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "node-fetch": "^2.7.0"
   }
 }
