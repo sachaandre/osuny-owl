@@ -11,11 +11,11 @@ Still under construction, it's main use is for the creation of large sums of dat
 After installing the package, simply use 
 
 ```javascript
-const OsunyOwl = require ('osuny-owl')
+import { OsunyOwl } from 'osuny-owl';
 
-let myOwl = new OsunyOwl(website_id)
+let myOwl = new OsunyOwl(website_id, api_url)
 ```
-Here, `website_id`is the unique identifier of one of your websites.
+Here, `website_id` is the unique identifier of one of your websites and `api_url` the url of your Osuny Instance API
 
 ## The OsunyUtility
 
@@ -25,7 +25,7 @@ Here, `website_id`is the unique identifier of one of your websites.
 To use it in your app, you can import it like this
 
 ```javascript
-const OsunyUtility = require('osuny-owl/osuny_utility')
+import { OsunyUtility } from 'osuny-owl';
 
 let chapterOne = OsunyUtility.createChapter(...)
 let datatableOne = OsunyUtility.createDatable(...)
