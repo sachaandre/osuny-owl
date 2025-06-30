@@ -6,6 +6,7 @@ export class OsunyOwl {
         this.category_ids = []
         this.api_key_defined = process.env.OSUNY_API_KEY ? true : false
         this.api_url = api_url
+        this.last_media = undefined
     }
 
     set website_id(website_id){
@@ -46,14 +47,6 @@ export class OsunyOwl {
         }
     }
 
-    /**
-     * TODO
-     * 
-     *  - function : postToOsuny(Communication::Post object)
-     *          * Vérifier la connexion API
-     *          * Vérifier qu'il y ait un site
-     * 
-     */
 
     /**
      * Async function to post a Communication::Post object to a specific website
@@ -86,8 +79,37 @@ export class OsunyOwl {
             }
         } else {
             throw new Error("No API Key Defined")
+        } 
+    }
+
+    async importImage(img_bdy){
+        console.log("OSUNY OWL")
+        console.log(img_bdy)
+
+        if(this.api_key_defined){
+            const url = this.api_url + "/communication/medias"
+            
+                try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers:{
+                        "X-Osuny-Token": process.env.OSUNY_API_KEY
+                    },
+                    body: img_bdy
+                })
+
+                if (!response.ok){
+                    throw new Error(`Response status: ${response.status}, ${response.statusText}`)
+                } else {
+                    this.last_media = response.body.original_blob
+                    return true
+                }
+            } catch (error) {
+                console.error(error.message)
+            }
+        } else {
+            throw new Error("No API Key Defined")
         }
-        
     }
 }
 
@@ -177,6 +199,37 @@ export class OsunyUtility{
                 "elements": table_data,
                 "alphabetical": alphabetical,
                 "caption": caption
+            }
+        }
+    }
+
+    /**
+     * Create a Video Block to include in an Osuny's Post
+     * 
+     * @param {string} video_url (Required) The actual url of the video
+     * @param {string} migration_identifier (Required) A unique migration identifier
+     * @param {number} position (Required) Position of the block in the post
+     * @param {string} video_title Title of the video, will be displayed alongside the media
+     * @param {string} video_desc Description of the video, will be displayed as a paragraph alongside the media
+     * @param {string} video_transc (Recommended) Transcription of the video
+     * @param {string} title (Optional) Title of the block, will be displayed as h3 on the website
+     * @returns Osuny's Communication::Block (Video) object
+     */
+    static createVideo(video_url, migration_identifier, position, video_title = "", video_desc = "", video_transc = "", title = ""){
+        return {
+            "id": null,
+            "migration_identifier": migration_identifier,
+            "template_kind": "video",
+            "title": title,
+            "position": position,
+            "published": "true",
+            "html_class": null,
+            "data": {
+                "layout": "player",
+                "description": video_desc,
+                "url": video_url,
+                "video_title": video_title,
+                "transcription": video_transc
             }
         }
     }
