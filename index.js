@@ -1,5 +1,7 @@
 import 'dotenv/config'
 
+import fetch from 'node-fetch'
+
 export class OsunyOwl {
     constructor(website_id, api_url){
         this.website_id = website_id
@@ -99,7 +101,7 @@ export class OsunyOwl {
                 })
 
                 if (!response.ok){
-                    throw new Error(`Response status: ${response.status}, ${response.statusText}`)
+                    throw new Error(`Response status: ${response.status}, ${response.statusText}. Error: ${response.text()}`)
                 } else {
                     this.last_media = response.body.original_blob
                     return true
