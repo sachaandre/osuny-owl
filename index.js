@@ -85,8 +85,6 @@ export class OsunyOwl {
     }
 
     async importImage(img_bdy){
-        console.log("OSUNY OWL")
-        console.log(img_bdy)
 
         if(this.api_key_defined){
             const url = this.api_url + "/communication/medias"
@@ -103,7 +101,8 @@ export class OsunyOwl {
                 if (!response.ok){
                     throw new Error(`Response status: ${response.status}, ${response.statusText}. Error: ${response.text()}`)
                 } else {
-                    this.last_media = response.body.original_blob
+                    let dataR = await response.json()
+                    this.last_media = dataR.original_blob
                     return true
                 }
             } catch (error) {
