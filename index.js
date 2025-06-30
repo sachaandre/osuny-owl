@@ -101,6 +101,7 @@ export class OsunyOwl {
                 if (!response.ok){
                     throw new Error(`Response status: ${response.status}, ${response.statusText}. Error: ${response.text()}`)
                 } else {
+                    
                     let dataR = await response.json()
                     this.last_media = dataR.original_blob
                     return true
@@ -231,6 +232,28 @@ export class OsunyUtility{
                 "url": video_url,
                 "video_title": video_title,
                 "transcription": video_transc
+            }
+        }
+    }
+
+    static createImage(img_id, img_filename, img_signedid, migration_identifier, position, alt="", credit="", text="", title = ""){
+        return {
+            "id": null,
+            "migration_identifier": migration_identifier,
+            "template_kind": "image",
+            "title": title,
+            "position": position,
+            "published": "true",
+            "html_class": null,
+            "data": {
+                "image": {
+                    "id": img_id,
+                    "filename": img_filename,
+                    "signed_id": img_signedid
+                },
+                "alt": alt,
+                "credit": credit,
+                "text": text
             }
         }
     }
