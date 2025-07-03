@@ -116,15 +116,54 @@ export class OsunyOwl {
 }
 
 export class OsunyUtility{
+
+    /**
+     * 
+     * @param {string} title **(Required)** Title to display 
+     * @param {*} migration_identifier **(Required)** A unique migration identifier
+     * @param {*} position **(Required)** The position of the block. The first element positionned in a post has the value : 0
+     * @param {*} layout (Optional) Layout of the block. By default set to 1. 1 = classic, 2 = collapsed,
+     * @returns Osuny's Communication::Block (Title) object
+     */
+    static createTitle(title, migration_identifier, position, layout = 1){
+        let layout_title;
+
+        switch (layout) {
+            case 1:
+                layout_title = "classic"
+                break;
+            
+            case 2:
+                layout_title = "collapsed"
+                break;
+            
+            default:
+                layout_title = "classic"
+                break;
+        }
+
+        return {
+            "id": null,
+            "migration_identifier": migration_identifier,
+            "template_kind": "title",
+            "title": title,
+            "position": position,
+            "published": true,
+            "html_class": null,
+            "data": {
+                "layout": layout_title
+            }
+        } 
+    }
     
     /**
      * Create a chapter Block to include in an Osuny's post
      * 
-     * @param {string} text - (Required) Main text of the chapter 
-     * @param {string} migration_identifier - (Required) a unique migration identifier
-     * @param {number} position - (Required) The position of the block. The first element positionned in a post has the value : 0
-     * @param {string} title - (Optional) Title of the block, will be displayed as h3 on the website
-     * @param {number} layout - Layout of the block. By default set to 1. 1 = no_background, 2 = alt_background, 3 = accent_background
+     * @param {string} text **(Required)** Main text of the chapter 
+     * @param {string} migration_identifier **(Required)** a unique migration identifier
+     * @param {number} position **(Required)** The position of the block. The first element positionned in a post has the value : 0
+     * @param {string} title (Optional) Title of the block, will be displayed as h3 on the website
+     * @param {number} layout Layout of the block. By default set to 1. 1 = no_background, 2 = alt_background, 3 = accent_background
      * @returns Osuny's Communication::Block (Chapter) object
      */
     
@@ -168,7 +207,7 @@ export class OsunyUtility{
     /**
      * Create a Datatable Block to include in an Osuny's Post
      * 
-     * @param {Array} table_data (Required) Array of objects with the following form
+     * @param {Array} table_data **(Required)** Array of objects with the following form
      *  ```
      *   { cells: [
      *      "value_1",
@@ -177,9 +216,9 @@ export class OsunyUtility{
      *   }
      * ```
      * - The number of strings in a "cells" array is representative of each cell in a row.
-     * @param {Array} table_headers (Required) Array of strings with all the columns header of the datatable
-     * @param {string} migration_identifier (Required) a unique migration identifier
-     * @param {number} position (Required) The position of the block. The first element positionned in a post has the value : 0
+     * @param {Array} table_headers **(Required)** Array of strings with all the columns header of the datatable
+     * @param {string} migration_identifier **(Required)** a unique migration identifier
+     * @param {number} position **(Required)** The position of the block. The first element positionned in a post has the value : 0
      * @param {string} title (Optional) Title of the block, will be displayed as h3 on the website
      * @param {boolean} alphabetical (Optional) Sort the datable in alphabetical order if set to true. False by default
      * @param {string} caption (Optional) Set the datable caption (usualy after the table). Set to an empty string by default.
@@ -208,9 +247,9 @@ export class OsunyUtility{
     /**
      * Create a Video Block to include in an Osuny's Post
      * 
-     * @param {string} video_url (Required) The actual url of the video
-     * @param {string} migration_identifier (Required) A unique migration identifier
-     * @param {number} position (Required) Position of the block in the post
+     * @param {string} video_url **(Required)** The actual url of the video
+     * @param {string} migration_identifier (**Required)** A unique migration identifier
+     * @param {number} position **(Required)** Position of the block in the post
      * @param {string} video_title Title of the video, will be displayed alongside the media
      * @param {string} video_desc Description of the video, will be displayed as a paragraph alongside the media
      * @param {string} video_transc (Recommended) Transcription of the video
