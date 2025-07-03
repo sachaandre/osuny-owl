@@ -304,11 +304,12 @@ export class OsunyUtility{
      * @param {string} migration_identifier (Required) A unique identifier to catch its migration in the logs 
      * @param {Array} blocks (Required) Array of the different Communication::Blocks composing the post 
      * @param {Array} category_ids (Optional) Array of strings representing the category or all the categories attached to this post. Empty Array by default
+     * @param {Date} crea_dt (Optional) Date of the post. Undefined by default
      * @param {boolean} full_width (Optional) Indicates if the article should take all the theme width. False by default
      * @param {string} summary (Optional) A short text that summerize the post. Empty string by default
      * @returns Osuny's Communication::Post object.
      */
-    static createPost(title, migration_identifier, blocks, category_ids = [], full_width=false, summary=""){
+    static createPost(title, migration_identifier, blocks, category_ids = [], crea_dt=undefined, full_width=false, summary=""){
         return {
             "id": undefined,
             "migration_identifier": migration_identifier,
@@ -322,11 +323,11 @@ export class OsunyUtility{
                     "featured_image": undefined,
                     "pinned": false,
                     "published": true,
-                    "published_at": undefined,
+                    "published_at": crea_dt,
                     "slug": this.slugify(title),
                     "summary": summary,
                     "blocks": blocks,
-                    "created_at": undefined
+                    "created_at": crea_dt
                 }
             }
 
