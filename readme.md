@@ -20,7 +20,7 @@ Here, `website_id` is the unique identifier of one of your websites and `api_url
 ## The OsunyUtility
 
 > [!NOTE]
-> The Utility is for the moment very limited. Images are not supported for the moment
+> The Utility is for the moment very limited. All the Blocks are not supported
 
 To use it in your app, you can import it like this
 
