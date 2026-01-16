@@ -1,6 +1,6 @@
 {
   "name": "osuny-owl",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Osuny Owl is an object that can go talk to the Osuny API, to create post or other osuny components from a large amount of data",
   "keywords": ["osuny", "api"],
   "license": "GPL-3.0",
