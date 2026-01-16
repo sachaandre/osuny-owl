@@ -1,5 +1,11 @@
 import * as blocks from './blocks/index.js';
-import { createPost, createProject, composePost } from './content.js';
+import { 
+  createPost,
+  createProject, 
+  composePost,
+  addLocaleToPost,
+  addLocaleToProject
+} from './content.js';
 import { slugify } from '../utils/slug.js';
 
 export class OsunyUtility {
@@ -11,5 +17,7 @@ export class OsunyUtility {
   static createPost = createPost;
   static createProject = createProject;
   static composePost = composePost;
+  static addLocaleToPost = addLocaleToPost;
+  static addLocaleToProject = addLocaleToProject;
   static slugify = slugify;
 }
