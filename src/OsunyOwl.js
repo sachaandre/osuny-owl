@@ -4,7 +4,8 @@ import { apiPost } from './api/client.js';
 export class OsunyOwl {
   constructor(website_id, api_url) {
     this.website_id = website_id;
-    this.category_ids = [];
+    this.post_category_ids = [];
+    this.portfolio_category_ids = [];
     this.api_key_defined = process.env.OSUNY_API_KEY ? true : false;
     this.api_url = api_url;
     this.last_media = undefined;
@@ -14,8 +15,12 @@ export class OsunyOwl {
     this._website_id = website_id;
   }
 
-  set category_ids(category_ids) {
-    this._category_ids = category_ids;
+  set post_category_ids(category_ids) {
+    this._post_category_ids = category_ids;
+  }
+
+  set portfolio_category_ids(category_ids){
+    this._portfolio_category_ids = category_ids;
   }
 
   checkApiKey() {
@@ -30,23 +35,43 @@ export class OsunyOwl {
     return this._category_ids;
   }
 
-  addCategory_id(category_id) {
-    this.category_ids.push(category_id);
+  addPostCategory_id(category_id) {
+    this.post_category_ids.push(category_id);
   }
 
-  removeCategory_id(category_id) {
-    if (this.category_ids.includes(category_id)) {
-      this.category_ids = this.category_ids.filter(e => e !== category_id);
+  removePostCategory_id(category_id) {
+    if (this.post_category_ids.includes(category_id)) {
+      this.post_category_ids = this.post_category_ids.filter(e => e !== category_id);
     }
   }
 
-  async postToOsuny(post) {
+  addPortfolioCategory_id(category_id) {
+    this.portfolio_category_ids.push(category_id);
+  }
+
+  removePortfolioCategory_id(category_id) {
+    if (this.portfolio_category_ids.includes(category_id)) {
+      this.portfolio_category_ids = this.portfolio_category_ids.filter(e => e !== category_id);
+    }
+  }
+
+  async postPostToOsuny(post) {
     if (this.api_key_defined) {
       const url = this.api_url + "/communication/websites/" + this.website_id + "/posts";
       await apiPost(url, post, process.env.OSUNY_API_KEY, false);
       return true;
     } else {
       throw new Error("No API Key Defined");
+    }
+  }
+
+  async postPortfolioToOsuny(post) {
+    if (this.api_key_defined) {
+      const url = this.api_url + "/communication/websites/" + this.website_id + "/portfolios";
+      await apiPost(url, post, process.env.OSUNY_API_KEY, false);
+      return true;
+    } else {
+      throw new Error("No API Key Defined")
     }
   }
 

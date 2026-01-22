@@ -3,3 +3,4 @@ export { createChapter } from './chapter.js';
 export { createDatatable } from './datatable.js';
 export { createVideo } from './video.js';
 export { createImage } from './image.js';
+export { createTimeline } from './timeline.js';
