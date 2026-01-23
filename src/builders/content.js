@@ -33,10 +33,10 @@ export function createProject(title, migration_identifier, year, blocks, locale 
     "category_ids": category_ids,
     "localizations": {
       [locale]: {
-        "id": undefined,
+        "id": null,
         "migration_identifier": migration_identifier + `_${locale}`,
         "title": title,
-        "featured_image": undefined,
+        "featured_image": null,
         "pinned": false,
         "published": true,
         "published_at": crea_dt,

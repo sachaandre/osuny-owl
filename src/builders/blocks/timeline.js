@@ -23,7 +23,7 @@ export function createTimeline(timeline_elements, migration_identifier, position
         "html_class": null,
         "data": {
             "layout": layout_text,
-            "text": timeline_elements
+            "elements": timeline_elements
         }
 
     }

@@ -5,7 +5,7 @@ export function createVideo(video_url, migration_identifier, position, video_tit
     "template_kind": "video",
     "title": title,
     "position": position,
-    "published": "true",
+    "published": true,
     "html_class": null,
     "data": {
       "layout": "player",

@@ -31,9 +31,14 @@ export class OsunyOwl {
     return this._website_id;
   }
 
-  get category_ids() {
-    return this._category_ids;
+  get post_category_ids() {
+    return this._post_category_ids;
   }
+
+   get portfolio_category_ids() {
+    return this._portfolio_category_ids;
+  }
+
 
   addPostCategory_id(category_id) {
     this.post_category_ids.push(category_id);
@@ -65,9 +70,9 @@ export class OsunyOwl {
     }
   }
 
-  async postPortfolioToOsuny(post) {
+  async postProjectToOsuny(post) {
     if (this.api_key_defined) {
-      const url = this.api_url + "/communication/websites/" + this.website_id + "/portfolios";
+      const url = this.api_url + "/communication/websites/" + this.website_id + "/portfolio/projects";
       await apiPost(url, post, process.env.OSUNY_API_KEY, false);
       return true;
     } else {
