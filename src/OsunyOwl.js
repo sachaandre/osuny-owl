@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { apiPost } from './api/client.js';
+import { apiPost, apiPatch } from './api/client.js';
 
 export class OsunyOwl {
   constructor(website_id, api_url) {
@@ -77,6 +77,30 @@ export class OsunyOwl {
       return true;
     } else {
       throw new Error("No API Key Defined")
+    }
+  }
+
+  // PATCH d'un projet portfolio existant.
+  // `id` peut être l'id numérique OU le migration_identifier du projet.
+  // `project` doit contenir le migration_identifier existant (vérifié côté API).
+  async patchProjectToOsuny(id, project) {
+    if (this.api_key_defined) {
+      const url = this.api_url + "/communication/websites/" + this.website_id + "/portfolio/projects/" + id;
+      return await apiPatch(url, project, process.env.OSUNY_API_KEY, false);
+    } else {
+      throw new Error("No API Key Defined");
+    }
+  }
+
+  // PATCH d'une actualité (post) existante.
+  // `id` peut être l'id numérique OU le migration_identifier du post.
+  // `post` doit contenir le migration_identifier existant (vérifié côté API).
+  async patchPostToOsuny(id, post) {
+    if (this.api_key_defined) {
+      const url = this.api_url + "/communication/websites/" + this.website_id + "/posts/" + id;
+      return await apiPatch(url, post, process.env.OSUNY_API_KEY, false);
+    } else {
+      throw new Error("No API Key Defined");
     }
   }
 
