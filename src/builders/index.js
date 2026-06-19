@@ -15,6 +15,7 @@ export class OsunyUtility {
   static createVideo = blocks.createVideo;
   static createImage = blocks.createImage;
   static createTimeline = blocks.createTimeline;
+  static createEmbed = blocks.createEmbed;
   static createPost = createPost;
   static createProject = createProject;
   static composePost = composePost;
